@@ -33,7 +33,7 @@ describe('POST /todos', () => {
         request(app)
             .post('/todos')
             .send({})
-            .expect(200) // not sure
+            .expect(400) // we set this in the server.js file
             .expect((res) => {
                 expect(res.body.name).toBe('ValidationError');
             })
