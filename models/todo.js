@@ -18,14 +18,4 @@ var TodoSchema = mongoose.Schema({
 
 var Todo = mongoose.model('Todo', TodoSchema);
 
-// var newTodo = new Todo({
-//     text: 'be a bic'
-// });
-
-// newTodo.save().then((result) => {
-//     console.log(`saved todo: ${JSON.stringify(result, undefined, 2)}`);
-// }, (err) => {
-//     console.log(err);
-// });
-
 module.exports = {Todo};
