@@ -13,7 +13,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/todos', (req, res) => {
-    console.log(req.body);
+    var todo = new Todo({
+        text: req.body.text
+    });
+    todo.save().then((doc) => {
+        res.send(doc);
+    }, (err) => {
+        res.send(err);
+    });
 });
 
 app.listen(3000, () => {
