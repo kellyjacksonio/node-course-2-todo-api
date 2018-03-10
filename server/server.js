@@ -6,6 +6,7 @@ const {User} = require('../models/user');
 const {Todo} = require('../models/todo');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -36,20 +37,20 @@ app.get('/todos', (req, res) => {
 app.get('/todos/:id', (req, res) => {
     var id = req.params.id;
     if(!ObjectID.isValid(id)) {
-        return res.send('Invalid todo ID');
+        return res.status(404).send('Invalid todo ID');
     }
     Todo.findById(id).then((todo) => {
         if(!todo) {
-            return res.send('This todo does not exist!');
+            return res.status(404).send('This todo does not exist!');
         }
-        res.send(todo.text);
+        res.send({todo});
     }, (err) => {
         res.status(400).send(err);
     });
 });
 
-app.listen(3000, () => {
-    console.log('listening!');
+app.listen(port, () => {
+    console.log(`listening on port ${port}!`);
 });
 
 module.exports = {app};
